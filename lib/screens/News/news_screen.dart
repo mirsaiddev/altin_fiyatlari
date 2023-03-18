@@ -23,7 +23,7 @@ class _NewsScreenState extends State<NewsScreen> {
           elevation: 0,
           centerTitle: true,
           title: Text(
-            'Haberler',
+            'Altın ve Ekonomi',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
           ),
           leading: IconButton(

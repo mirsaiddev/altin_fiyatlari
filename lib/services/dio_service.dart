@@ -23,7 +23,7 @@ class DioService {
       'Content-Type': 'application/json; charset=UTF-8',
     };
     String token = '6L3mJaBZdRied46irK08NHNDAPPVSpTHmpyLkDLMYmvCqdXVyi509vtwUigR';
-    // headers.addAll({'Authorization': 'Bearer $token'});
+    headers.addAll({'Authorization': 'Bearer $token'});
     dio.options.baseUrl = 'https://www.nosyapi.com/apiv2/';
     dio.options.headers = headers;
   }

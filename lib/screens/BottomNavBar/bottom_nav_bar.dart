@@ -1,6 +1,7 @@
 import 'package:altin_fiyatlari/provider/data_provider.dart';
 import 'package:altin_fiyatlari/screens/Home/home_screen.dart';
 import 'package:altin_fiyatlari/screens/News/news_screen.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -32,6 +33,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
     dataProvider.getCurrencies();
     dataProvider.getNews();
+    FirebaseMessaging.instance.subscribeToTopic('all');
     setState(() {});
   }
 
@@ -45,11 +47,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Ana Sayfa',
+            label: 'Altın Fiyatları',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.newspaper),
-            label: 'Haberler',
+            label: 'Altın ve Ekonomi',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.info),

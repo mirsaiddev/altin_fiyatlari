@@ -1,31 +1,21 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:altin_fiyatlari/utils/string_extensions.dart';
+
 class NewModel {
   final String title;
   final String description;
   final String image;
   final String url;
+  final int id;
   NewModel({
     required this.title,
     required this.description,
     required this.image,
     required this.url,
+    required this.id,
   });
-
-  NewModel copyWith({
-    String? title,
-    String? description,
-    String? image,
-    String? url,
-  }) {
-    return NewModel(
-      title: title ?? this.title,
-      description: description ?? this.description,
-      image: image ?? this.image,
-      url: url ?? this.url,
-    );
-  }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -33,15 +23,17 @@ class NewModel {
       'description': description,
       'image': image,
       'url': url,
+      'id': id,
     };
   }
 
   factory NewModel.fromMap(Map<dynamic, dynamic> map) {
     return NewModel(
-      title: map['title'] as String,
-      description: map['description'] as String,
+      title: (map['title'] as String).changeG(),
+      description: (map['description'] as String).changeG(),
       image: map['image'] as String,
       url: map['url'] as String,
+      id: map['id'] as int,
     );
   }
 

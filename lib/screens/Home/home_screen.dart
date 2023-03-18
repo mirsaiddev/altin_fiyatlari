@@ -204,10 +204,12 @@ class NewCard extends StatelessWidget {
         margin: const EdgeInsets.only(right: 16),
         width: 270,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(16),
@@ -223,7 +225,7 @@ class NewCard extends StatelessWidget {
                 SizedBox(height: 12),
                 Text(
                   newModel.title,
-                  maxLines: 3,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 18,

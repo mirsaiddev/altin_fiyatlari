@@ -35,9 +35,7 @@ class _NewDetailScreenState extends State<NewDetailScreen> {
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (ad) {
             ad.fullScreenContentCallback = FullScreenContentCallback(
-              onAdDismissedFullScreenContent: (ad) {
-                _loadInterstitialAd();
-              },
+              onAdDismissedFullScreenContent: (ad) {},
             );
             interstitialAd = ad;
             print('AD LOADED');
@@ -71,48 +69,49 @@ class _NewDetailScreenState extends State<NewDetailScreen> {
           children: [
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 16),
-                    Text(
-                      widget.newModel.title,
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: Colors.grey),
-                    ),
-                    SizedBox(height: 16),
-                    // Row(
-                    //   children: [
-                    //     CircleAvatar(
-                    //       backgroundColor: Colors.grey,
-                    //       radius: 14,
-                    //     ),
-                    //     SizedBox(width: 8),
-                    //     Text('CNN Haber', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.grey)),
-                    //     SizedBox(width: 8),
-                    //     CircleAvatar(radius: 2, backgroundColor: Colors.grey),
-                    //     SizedBox(width: 8),
-                    //     Text('Kas 28, 2022', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey)),
-                    //   ],
-                    // ),
-                    // SizedBox(height: 24),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: Container(
-                        height: 200,
-                        width: double.infinity,
-                        child: Image.network(
-                          widget.newModel.image,
-                          fit: BoxFit.cover,
+                padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 10),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.newModel.title,
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.grey),
+                      ),
+                      SizedBox(height: 16),
+                      // Row(
+                      //   children: [
+                      //     CircleAvatar(
+                      //       backgroundColor: Colors.grey,
+                      //       radius: 14,
+                      //     ),
+                      //     SizedBox(width: 8),
+                      //     Text('CNN Haber', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.grey)),
+                      //     SizedBox(width: 8),
+                      //     CircleAvatar(radius: 2, backgroundColor: Colors.grey),
+                      //     SizedBox(width: 8),
+                      //     Text('Kas 28, 2022', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey)),
+                      //   ],
+                      // ),
+                      // SizedBox(height: 24),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: Container(
+                          height: 200,
+                          width: double.infinity,
+                          child: Image.network(
+                            widget.newModel.image,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 32),
-                    Text(
-                      widget.newModel.description,
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Colors.grey),
-                    )
-                  ],
+                      SizedBox(height: 32),
+                      Text(
+                        widget.newModel.description,
+                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Colors.grey),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
