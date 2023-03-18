@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "542215248957",
+    "project_id": "altin-fiyatlari-12b81",
+    "storage_bucket": "altin-fiyatlari-12b81.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:542215248957:android:78b41f3f894179ed421e54",
+        "android_client_info": {
+          "package_name": "com.altinfiyatlari.tr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "542215248957-9tdqg1562us8rec6qcttdkvpgi638ktt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXPkM2VMZWYbYcdOkZgBK6LXJuRUdkBIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "542215248957-9tdqg1562us8rec6qcttdkvpgi638ktt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "542215248957-afl8jogm626lien7vtimi8522lhnpvnj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.altinfiyatlari.tr"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

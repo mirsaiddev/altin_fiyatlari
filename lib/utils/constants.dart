@@ -1,0 +1,18 @@
+List allCurrencies = [
+  {"code": "tam-altin", "ShortName": "Tam Altın", "FullName": "Tam Altın"},
+  {"code": "yarim-altin", "ShortName": "Yarım Altın", "FullName": "Yarım Altın"},
+  {"code": "gram-altin", "ShortName": "Altın", "FullName": "Gram Altın"},
+  {"code": "cumhuriyet-altini", "ShortName": "Cumhuriyet Altını", "FullName": "Cumhuriyet Altını"},
+  {"code": "ceyrek-altin", "ShortName": "Çeyrek Altın", "FullName": "Çeyrek Altın"},
+  {"code": "ata-altin", "ShortName": "Ata Altın", "FullName": "Ata Altın"},
+  {"code": "14-ayar-altin", "ShortName": "14 Ayar Altın", "FullName": "14 Ayar Altın"},
+  {"code": "18-ayar-altin", "ShortName": "18 Ayar Altın", "FullName": "18 Ayar Altın"},
+  {"code": "22-ayar-bilezik", "ShortName": "22 Ayar Bilezik", "FullName": "22 Ayar Bilezik"},
+  {"code": "ikibucuk-altin", "ShortName": "İkibuçuk Altın", "FullName": "İkibuçuk Altın"},
+  {"code": "besli-altin", "ShortName": "Beşli Altın", "FullName": "Beşli Altın"},
+  {"code": "gremse-altin", "ShortName": "Gremse Altın", "FullName": "Gremse Altın"},
+  {"code": "resat-altin", "ShortName": "Reşat Altın", "FullName": "Reşat Altın"},
+  {"code": "hamit-altin", "ShortName": "Hamit Altın", "FullName": "Hamit Altın"},
+  {"code": "gumus", "ShortName": "Gumus Gram Spot", "FullName": "Gumus Gram Spot"},
+  {"code": "22-ayar-altin", "ShortName": "22 Ayar Altın", "FullName": "22 Ayar Altın"},
+];
