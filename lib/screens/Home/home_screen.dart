@@ -21,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     DataProvider dataProvider = Provider.of<DataProvider>(context);
     List<CurrenyModel> currencies = dataProvider.currencies;
+    print('currencies.length: ${currencies.length}');
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -30,13 +31,13 @@ class _HomeScreenState extends State<HomeScreen> {
           'Güncel altın fiyatları',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
         ),
-        leading: IconButton(
-          onPressed: () {},
-          icon: Image.asset(
-            ImageService.icon('menu'),
-            height: 20,
-          ),
-        ),
+        // leading: IconButton(
+        //   onPressed: () {},
+        //   icon: Image.asset(
+        //     ImageService.icon('menu'),
+        //     height: 20,
+        //   ),
+        // ),
       ),
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -52,7 +53,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         stream: FirestoreService().getStreamNews(),
                         builder: (context, snapshot) {
                           if (!snapshot.hasData) {
-                            return const Center(child: CircularProgressIndicator());
+                            return const Center(
+                                child: CircularProgressIndicator());
                           }
                           List<NewModel> news = [];
                           Map data = snapshot.data!.data() as Map;
@@ -64,7 +66,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Row(
                               children: [
                                 SizedBox(width: 24),
-                                for (NewModel newModel in news) NewCard(newModel: newModel),
+                                for (NewModel newModel in news)
+                                  NewCard(newModel: newModel),
                               ],
                             ),
                           );
@@ -146,8 +149,16 @@ class DataCard extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Alış: ', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.green)),
-                              Text('${currency.buying} TL', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.green)),
+                              Text('Alış: ',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.green)),
+                              Text('${currency.buying} TL',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.green)),
                             ],
                           ),
                         ),
@@ -155,8 +166,16 @@ class DataCard extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Satış: ', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.red)),
-                              Text('${currency.selling} TL', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.red)),
+                              Text('Satış: ',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.red)),
+                              Text('${currency.selling} TL',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.red)),
                             ],
                           ),
                         ),
@@ -164,9 +183,16 @@ class DataCard extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Değişim: ', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.grey)),
+                              Text('Degişim: ',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.grey)),
                               Text('%${currency.changeRate.toStringAsFixed(3)}',
-                                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.grey)),
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.grey)),
                             ],
                           ),
                         ),
@@ -198,7 +224,10 @@ class NewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => NewDetailScreen(newModel: newModel)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => NewDetailScreen(newModel: newModel)));
       },
       child: Container(
         margin: const EdgeInsets.only(right: 16),
@@ -228,9 +257,9 @@ class NewCard extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.grey,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black87,
                   ),
                 ),
               ],

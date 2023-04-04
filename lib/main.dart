@@ -2,6 +2,7 @@ import 'package:altin_fiyatlari/admin/screens/Home/admin_home.dart';
 import 'package:altin_fiyatlari/provider/data_provider.dart';
 import 'package:altin_fiyatlari/screens/BottomNavBar/bottom_nav_bar.dart';
 import 'package:altin_fiyatlari/screens/Home/home_screen.dart';
+import 'package:altin_fiyatlari/screens/Splash/splash_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Sk-Modernist',
         ),
         debugShowCheckedModeBanner: false,
-        home: kIsWeb ? AdminHome() : BottomNavBar(),
+        home: kIsWeb ? AdminHome() : SplashScreen(),
       ),
     );
   }

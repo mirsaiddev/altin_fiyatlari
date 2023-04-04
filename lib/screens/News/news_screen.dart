@@ -2,6 +2,7 @@ import 'package:altin_fiyatlari/model/news_model.dart';
 import 'package:altin_fiyatlari/provider/data_provider.dart';
 import 'package:altin_fiyatlari/screens/NewDetail/new_detail_screen.dart';
 import 'package:altin_fiyatlari/services/image_service.dart';
+import 'package:altin_fiyatlari/utils/google_ads/custom_ad.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,24 +27,31 @@ class _NewsScreenState extends State<NewsScreen> {
             'Altın ve Ekonomi',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
           ),
-          leading: IconButton(
-            onPressed: () {},
-            icon: Image.asset(
-              ImageService.icon('menu'),
-              height: 20,
-            ),
-          ),
+          // leading: IconButton(
+          //   onPressed: () {},
+          //   icon: Image.asset(
+          //     ImageService.icon('menu'),
+          //     height: 20,
+          //   ),
+          // ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: ListView.builder(
-            itemCount: news.length,
-            itemBuilder: (context, index) {
-              return NewTile(
-                newModel: news[index],
-              );
-            },
-          ),
+        body: Column(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: ListView.builder(
+                  itemCount: news.length,
+                  itemBuilder: (context, index) {
+                    return NewTile(
+                      newModel: news[index],
+                    );
+                  },
+                ),
+              ),
+            ),
+            BannerAdClass(),
+          ],
         ));
   }
 }
@@ -88,7 +96,11 @@ class NewTile extends StatelessWidget {
                 children: [
                   Text(
                     newModel.title,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.grey),
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black87,
+                    ),
                   ),
                   SizedBox(height: 8),
                   // Text(newModel.site, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Colors.grey)),

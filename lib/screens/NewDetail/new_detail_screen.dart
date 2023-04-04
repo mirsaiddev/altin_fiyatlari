@@ -69,14 +69,20 @@ class _NewDetailScreenState extends State<NewDetailScreen> {
           children: [
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24.0, vertical: 10),
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         widget.newModel.title,
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.grey),
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black87,
+                          fontFamily: 'Book-Antiqua',
+                        ),
                       ),
                       SizedBox(height: 16),
                       // Row(
@@ -108,7 +114,12 @@ class _NewDetailScreenState extends State<NewDetailScreen> {
                       SizedBox(height: 32),
                       Text(
                         widget.newModel.description,
-                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Colors.grey),
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: 'Book-Antiqua',
+                          color: Colors.black87,
+                        ),
                       )
                     ],
                   ),

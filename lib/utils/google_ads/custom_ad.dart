@@ -34,10 +34,13 @@ class _BannerAdClassState extends State<BannerAdClass> {
       child: SizedBox(
         width: double.infinity,
         child: Card(
-          color: Colors.grey,
+          color: Colors.transparent,
+          elevation: 0,
           child: SizedBox(
             width: double.infinity,
-            height: _bannerAd != null ? _bannerAd?.size.height.toDouble() ?? 50 : 50,
+            height: _bannerAd != null
+                ? _bannerAd?.size.height.toDouble() ?? 50
+                : 50,
             child: _bannerAd != null ? AdWidget(ad: _bannerAd!) : SizedBox(),
           ),
         ),
@@ -46,7 +49,8 @@ class _BannerAdClassState extends State<BannerAdClass> {
   }
 
   _loadBanner() async {
-    await MobileAds.instance.updateRequestConfiguration(RequestConfiguration(testDeviceIds: ['F0BBA98E732040A976BF910824BE0730']));
+    await MobileAds.instance.updateRequestConfiguration(RequestConfiguration(
+        testDeviceIds: ['F0BBA98E732040A976BF910824BE0730']));
     _bannerAd = BannerAd(
       adUnitId: AdHelper.bannerAdUnitId,
       size: AdSize.banner,
