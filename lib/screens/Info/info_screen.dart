@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:in_app_review/in_app_review.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
-class InfoScreen extends StatelessWidget {
+class InfoScreen extends StatefulWidget {
   const InfoScreen({Key? key}) : super(key: key);
+
+  @override
+  State<InfoScreen> createState() => _InfoScreenState();
+}
+
+class _InfoScreenState extends State<InfoScreen> {
+  InAppReview inAppReview = InAppReview.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -34,30 +44,31 @@ class InfoScreen extends StatelessWidget {
                       'Altın fiyatları uygulamamız üzerinden anlık olarak güncellenen gram, çeyrek, ons, reşat, cumhuriyet, tam altın gibi ürünlerin alış ve satış fiyatlarına ulaşabilir ve 24 saat içerisindeki değişim bilgilerini görüntüleyebilirsiniz.'),
                 ),
               ),
+
               Card(
                 child: ListTile(
-                  leading: Icon(Icons.privacy_tip),
-                  title: Text('Gizlilik Politikası'),
-                ),
-              ),
-              Card(
-                child: ListTile(
+                  onTap: () {
+                    Share.share('https://play.google.com/store/apps/details?id=com.altinfiyatlari.tr');
+                  },
                   leading: Icon(Icons.share),
                   title: Text('Uygulamayı Paylaş'),
                 ),
               ),
               Card(
                 child: ListTile(
+                  onTap: () {
+                    inAppReview.requestReview();
+                  },
                   leading: Icon(Icons.rate_review),
                   title: Text('Puan Ver ve Yorum Yap'),
                 ),
               ),
-              Card(
-                child: ListTile(
-                  leading: Icon(Icons.mail),
-                  title: Text('İletişim'),
-                ),
-              ),
+              // Card(
+              //   child: ListTile(
+              //     leading: Icon(Icons.mail),
+              //     title: Text('İletişim'),
+              //   ),
+              // ),
             ],
           ),
         ),

@@ -53,8 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         stream: FirestoreService().getStreamNews(),
                         builder: (context, snapshot) {
                           if (!snapshot.hasData) {
-                            return const Center(
-                                child: CircularProgressIndicator());
+                            return const Center(child: CircularProgressIndicator());
                           }
                           List<NewModel> news = [];
                           Map data = snapshot.data!.data() as Map;
@@ -66,8 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Row(
                               children: [
                                 SizedBox(width: 24),
-                                for (NewModel newModel in news)
-                                  NewCard(newModel: newModel),
+                                for (NewModel newModel in news) NewCard(newModel: newModel),
                               ],
                             ),
                           );
@@ -106,6 +104,7 @@ class DataCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DataProvider dataProvider = Provider.of<DataProvider>(context);
     return Column(
       children: [
         Container(
@@ -139,7 +138,7 @@ class DataCard extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(width: 20),
+              SizedBox(width: 10),
               Expanded(
                 child: Builder(
                   builder: (context) {
@@ -149,50 +148,44 @@ class DataCard extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Alış: ',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.green)),
-                              Text('${currency.buying} TL',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.green)),
+                              Text('Alış: ', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.green)),
+                              Text('${currency.buying} TL', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.green)),
                             ],
                           ),
                         ),
+                        SizedBox(width: 4),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Satış: ',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.red)),
-                              Text('${currency.selling} TL',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.red)),
+                              Text('Satış: ', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.red)),
+                              Text('${currency.selling} TL', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.red)),
                             ],
                           ),
                         ),
+                        SizedBox(width: 4),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Degişim: ',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.grey)),
+                              Text('Degişim: ', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.grey)),
                               Text('%${currency.changeRate.toStringAsFixed(3)}',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.grey)),
+                                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.grey)),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Image.asset(
+                                ImageService.icon('poligon'),
+                                height: 40,
+                              ),
+                              Text(
+                                dataProvider.tick.toString(),
+                                style: TextStyle(fontSize: 12),
+                              ),
                             ],
                           ),
                         ),
@@ -224,10 +217,7 @@ class NewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => NewDetailScreen(newModel: newModel)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => NewDetailScreen(newModel: newModel)));
       },
       child: Container(
         margin: const EdgeInsets.only(right: 16),

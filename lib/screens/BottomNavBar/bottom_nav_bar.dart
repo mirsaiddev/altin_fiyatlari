@@ -32,8 +32,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   }
 
   void getData() {
-    DataProvider dataProvider =
-        Provider.of<DataProvider>(context, listen: false);
+    DataProvider dataProvider = Provider.of<DataProvider>(context, listen: false);
 
     dataProvider.getCurrencies();
     dataProvider.getNews();
@@ -77,11 +76,21 @@ class _BottomNavBarState extends State<BottomNavBar> {
         body: PersistentTabView(
       context,
       screens: pages,
+      popAllScreensOnTapAnyTabs: true,
       navBarStyle: NavBarStyle.style6,
       itemAnimationProperties: const ItemAnimationProperties(
         duration: Duration(milliseconds: 100),
         curve: Curves.ease,
       ),
+      onItemSelected: (value) {
+        Navigator.popUntil(context, (route) => route.isFirst);
+        currentIndex = value;
+        if (currentIndex != 2) {
+          showAd();
+          _loadInterstitialAd();
+        }
+        setState(() {});
+      },
       items: [
         PersistentBottomNavBarItem(
           activeColorPrimary: Colors.amber[800]!,

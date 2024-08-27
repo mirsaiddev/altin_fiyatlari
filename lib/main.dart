@@ -14,14 +14,13 @@ Future<void> main() async {
   if (kIsWeb) {
     await Firebase.initializeApp(
       options: FirebaseOptions(
-        apiKey: "AIzaSyDyu3YNtWyw4mQpmEk9nejmKZL35QOXso4",
-        authDomain: "altin-fiyatlari-12b81.firebaseapp.com",
-        projectId: "altin-fiyatlari-12b81",
-        storageBucket: "altin-fiyatlari-12b81.appspot.com",
-        messagingSenderId: "542215248957",
-        appId: "1:542215248957:web:20316711d9037fa6421e54",
-        measurementId: "G-ZVY899S1WR",
-      ),
+          apiKey: "AIzaSyAfVK-KqotBBEVJ78HKKOs9QMzqDJ__vdE",
+          authDomain: "altin-fiyatlari-559a8.firebaseapp.com",
+          projectId: "altin-fiyatlari-559a8",
+          storageBucket: "altin-fiyatlari-559a8.appspot.com",
+          messagingSenderId: "966075675098",
+          appId: "1:966075675098:web:dcbe542591d68c5d6210e3",
+          measurementId: "G-B1R434FK26"),
     );
   } else {
     await Firebase.initializeApp();

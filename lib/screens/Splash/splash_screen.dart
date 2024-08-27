@@ -1,7 +1,9 @@
+import 'package:altin_fiyatlari/provider/data_provider.dart';
 import 'package:altin_fiyatlari/screens/BottomNavBar/bottom_nav_bar.dart';
 import 'package:altin_fiyatlari/utils/google_ads/ad_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -49,8 +51,11 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigate() {
+    DataProvider dataProvider = Provider.of<DataProvider>(context, listen: false);
+    dataProvider.starTimer();
+
     Future.delayed(
-      const Duration(seconds: 3),
+      const Duration(seconds: 5),
       () {
         try {
           showAd();
@@ -61,10 +66,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           );
         }
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => BottomNavBar()),
-            (route) => false);
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => BottomNavBar()), (route) => false);
       },
     );
   }
@@ -88,6 +90,11 @@ class _SplashScreenState extends State<SplashScreen> {
                 fontWeight: FontWeight.w600,
               ),
             ),
+            const SizedBox(height: 20),
+            Text(
+              'Altın fiyatları güncelleniyor, \nlütfen bir kaç saniye bekleyiniz.',
+              textAlign: TextAlign.center,
+            )
           ],
         ),
       ),

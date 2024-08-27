@@ -26,6 +26,10 @@ class FirestoreService {
   }
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> getStreamNews() {
-    return firebaseFirestore.collection('news').doc('news').snapshots();
+    try {
+      return firebaseFirestore.collection('news').doc('news').snapshots();
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 }

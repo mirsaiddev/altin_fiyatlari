@@ -1,0 +1,1 @@
+/Applications/Android\ Studio.app/Contents/jre/Contents/Home/bin/keytool -genkey -v -keystore ~/altin.jks -keyalg RSA -keysize 2048 -validity 10000 -alias altin

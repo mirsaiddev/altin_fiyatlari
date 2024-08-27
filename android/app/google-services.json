@@ -1,41 +1,34 @@
 {
   "project_info": {
-    "project_number": "542215248957",
-    "project_id": "altin-fiyatlari-12b81",
-    "storage_bucket": "altin-fiyatlari-12b81.appspot.com"
+    "project_number": "966075675098",
+    "project_id": "altin-fiyatlari-559a8",
+    "storage_bucket": "altin-fiyatlari-559a8.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:542215248957:android:78b41f3f894179ed421e54",
+        "mobilesdk_app_id": "1:966075675098:android:64bbbbaf8ff4a28f6210e3",
         "android_client_info": {
           "package_name": "com.altinfiyatlari.tr"
         }
       },
       "oauth_client": [
         {
-          "client_id": "542215248957-9tdqg1562us8rec6qcttdkvpgi638ktt.apps.googleusercontent.com",
+          "client_id": "966075675098-98pk4e6ia4n8m56d620vajvc0sqmjanf.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAXPkM2VMZWYbYcdOkZgBK6LXJuRUdkBIE"
+          "current_key": "AIzaSyC-OjUS8R6hjAavug2nPpqUTBGebMvZdtU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "542215248957-9tdqg1562us8rec6qcttdkvpgi638ktt.apps.googleusercontent.com",
+              "client_id": "966075675098-98pk4e6ia4n8m56d620vajvc0sqmjanf.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "542215248957-afl8jogm626lien7vtimi8522lhnpvnj.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.altinfiyatlari.tr"
-              }
             }
           ]
         }
