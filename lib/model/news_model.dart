@@ -39,7 +39,8 @@ class NewModel {
 
   String toJson() => json.encode(toMap());
 
-  factory NewModel.fromJson(String source) => NewModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory NewModel.fromJson(String source) =>
+      NewModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -50,11 +51,17 @@ class NewModel {
   bool operator ==(covariant NewModel other) {
     if (identical(this, other)) return true;
 
-    return other.title == title && other.description == description && other.image == image && other.url == url;
+    return other.title == title &&
+        other.description == description &&
+        other.image == image &&
+        other.url == url;
   }
 
   @override
   int get hashCode {
-    return title.hashCode ^ description.hashCode ^ image.hashCode ^ url.hashCode;
+    return title.hashCode ^
+        description.hashCode ^
+        image.hashCode ^
+        url.hashCode;
   }
 }

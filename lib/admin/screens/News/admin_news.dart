@@ -23,7 +23,8 @@ class _AdminNewsState extends State<AdminNews> {
         actions: [
           TextButton.icon(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => CreateNews()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => CreateNews()));
             },
             icon: Icon(Icons.add, color: Colors.white),
             label: Text('Yeni Haber', style: TextStyle(color: Colors.white)),
@@ -41,17 +42,21 @@ class _AdminNewsState extends State<AdminNews> {
           for (Map<String, dynamic> item in data.values) {
             news.add(NewModel.fromMap(item));
           }
+          news.sort((a, b) => b.id.compareTo(a.id));
           return GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: itemCount),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: itemCount),
             itemBuilder: (context, index) {
               return Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
                 child: Column(
                   children: [
                     Expanded(
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
-                        child: Image.network(news[index].image, fit: BoxFit.cover),
+                        child:
+                            Image.network(news[index].image, fit: BoxFit.cover),
                       ),
                     ),
                     Padding(
@@ -78,9 +83,14 @@ class _AdminNewsState extends State<AdminNews> {
                             ],
                             onSelected: (val) async {
                               if (val == 'delete') {
-                                await FirestoreService().deleteNews(news[index]);
+                                await FirestoreService()
+                                    .deleteNews(news[index]);
                               } else {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => CreateNews(newModel: news[index])));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            CreateNews(newModel: news[index])));
                               }
                             },
                           ),

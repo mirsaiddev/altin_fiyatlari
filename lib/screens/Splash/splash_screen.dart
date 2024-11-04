@@ -51,11 +51,12 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigate() {
-    DataProvider dataProvider = Provider.of<DataProvider>(context, listen: false);
+    DataProvider dataProvider =
+        Provider.of<DataProvider>(context, listen: false);
     dataProvider.starTimer();
 
     Future.delayed(
-      const Duration(seconds: 5),
+      const Duration(seconds: 3),
       () {
         try {
           showAd();
@@ -66,7 +67,10 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           );
         }
-        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => BottomNavBar()), (route) => false);
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => BottomNavBar()),
+            (route) => false);
       },
     );
   }

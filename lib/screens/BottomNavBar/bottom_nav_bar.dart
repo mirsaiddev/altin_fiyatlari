@@ -6,7 +6,7 @@ import 'package:altin_fiyatlari/utils/google_ads/ad_helper.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:provider/provider.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -32,7 +32,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
   }
 
   void getData() {
-    DataProvider dataProvider = Provider.of<DataProvider>(context, listen: false);
+    DataProvider dataProvider =
+        Provider.of<DataProvider>(context, listen: false);
 
     dataProvider.getCurrencies();
     dataProvider.getNews();
@@ -76,12 +77,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
         body: PersistentTabView(
       context,
       screens: pages,
-      popAllScreensOnTapAnyTabs: true,
-      navBarStyle: NavBarStyle.style6,
-      itemAnimationProperties: const ItemAnimationProperties(
-        duration: Duration(milliseconds: 100),
-        curve: Curves.ease,
+      margin: EdgeInsets.only(bottom: 20),
+      bottomScreenMargin: 10,
+      animationSettings: NavBarAnimationSettings(
+        navBarItemAnimation: ItemAnimationSettings(
+          duration: Duration(milliseconds: 300),
+          curve: Curves.ease,
+        ),
       ),
+      navBarStyle: NavBarStyle.style6,
       onItemSelected: (value) {
         Navigator.popUntil(context, (route) => route.isFirst);
         currentIndex = value;

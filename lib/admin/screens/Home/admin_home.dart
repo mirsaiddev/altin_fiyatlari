@@ -1,3 +1,4 @@
+import 'package:altin_fiyatlari/admin/screens/Currencies/admin_currencies.dart';
 import 'package:altin_fiyatlari/admin/screens/News/admin_news.dart';
 import 'package:altin_fiyatlari/admin/screens/Notifications/admin_notifs.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,8 @@ class _AdminHomeState extends State<AdminHome> {
   }
 
   void getData() {
-    DataProvider dataProvider = Provider.of<DataProvider>(context, listen: false);
+    DataProvider dataProvider =
+        Provider.of<DataProvider>(context, listen: false);
 
     dataProvider.getCurrencies();
     dataProvider.getNews();
@@ -39,10 +41,14 @@ class _AdminHomeState extends State<AdminHome> {
             child: Column(
               children: [
                 SizedBox(height: 20),
-                Text('Admin Paneli', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                Text('Admin Paneli',
+                    style:
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
                 SizedBox(height: 20),
                 Card(
-                  color: currentPage is AdminNews ? Colors.grey[200] : Colors.white,
+                  color: currentPage is AdminNews
+                      ? Colors.grey[200]
+                      : Colors.white,
                   child: ListTile(
                     leading: Icon(Icons.newspaper),
                     title: Text('Haberler'),
@@ -54,13 +60,29 @@ class _AdminHomeState extends State<AdminHome> {
                   ),
                 ),
                 Card(
-                  color: currentPage is AdminNotifications ? Colors.grey[200] : Colors.white,
+                  color: currentPage is AdminNotifications
+                      ? Colors.grey[200]
+                      : Colors.white,
                   child: ListTile(
                     leading: Icon(Icons.notifications),
                     title: Text('Bildirimler'),
                     onTap: () {
                       setState(() {
                         currentPage = AdminNotifications();
+                      });
+                    },
+                  ),
+                ),
+                Card(
+                  color: currentPage is AdminCurrencies
+                      ? Colors.grey[200]
+                      : Colors.white,
+                  child: ListTile(
+                    leading: Icon(Icons.monetization_on),
+                    title: Text('Currencies'),
+                    onTap: () {
+                      setState(() {
+                        currentPage = AdminCurrencies();
                       });
                     },
                   ),

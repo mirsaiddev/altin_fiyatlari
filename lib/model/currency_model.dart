@@ -74,15 +74,16 @@ class CurrenyModel {
       selling: map['selling'].toDouble() as double,
       latest: map['latest'].toInt() as int,
       changeRate: map['changeRate'].toDouble() as double,
-      dayMin: map['dayMin'].toDouble() as double,
-      dayMax: map['dayMax'].toDouble() as double,
+      dayMin: map['dayMin'] != null ? map['dayMin'].toDouble() as double : 0.0,
+      dayMax: map['dayMax'] != null ? map['dayMax'].toDouble() as double : 0.0,
       lastupdate: map['lastupdate'] as String,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory CurrenyModel.fromJson(String source) => CurrenyModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory CurrenyModel.fromJson(String source) =>
+      CurrenyModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {

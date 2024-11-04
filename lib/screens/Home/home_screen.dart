@@ -1,6 +1,7 @@
 import 'package:altin_fiyatlari/model/currency_model.dart';
 import 'package:altin_fiyatlari/model/news_model.dart';
 import 'package:altin_fiyatlari/provider/data_provider.dart';
+import 'package:altin_fiyatlari/screens/Home/currency_detail.dart';
 import 'package:altin_fiyatlari/screens/NewDetail/new_detail_screen.dart';
 import 'package:altin_fiyatlari/services/firestore_service.dart';
 import 'package:altin_fiyatlari/services/image_service.dart';
@@ -40,54 +41,96 @@ class _HomeScreenState extends State<HomeScreen> {
         // ),
       ),
       backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 20),
-                    StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-                        stream: FirestoreService().getStreamNews(),
-                        builder: (context, snapshot) {
-                          if (!snapshot.hasData) {
-                            return const Center(child: CircularProgressIndicator());
-                          }
-                          List<NewModel> news = [];
-                          Map data = snapshot.data!.data() as Map;
-                          for (Map<String, dynamic> item in data.values) {
-                            news.add(NewModel.fromMap(item));
-                          }
-                          return SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
-                                SizedBox(width: 24),
-                                for (NewModel newModel in news) NewCard(newModel: newModel),
-                              ],
+      body: DefaultTabController(
+        length: 2,
+        child: SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 20),
+                      SizedBox(
+                        height: 220,
+                        child: StreamBuilder<
+                                DocumentSnapshot<Map<String, dynamic>>>(
+                            stream: FirestoreService().getStreamNews(),
+                            builder: (context, snapshot) {
+                              if (!snapshot.hasData) {
+                                return const Center(
+                                    child: CircularProgressIndicator());
+                              }
+                              List<NewModel> news = [];
+                              Map data = snapshot.data!.data() as Map;
+                              for (Map<String, dynamic> item in data.values) {
+                                news.add(NewModel.fromMap(item));
+                              }
+                              news.sort((a, b) => b.id.compareTo(a.id));
+                              return SizedBox(
+                                height: 220,
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: [
+                                      SizedBox(width: 24),
+                                      for (NewModel newModel in news)
+                                        NewCard(newModel: newModel),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }),
+                      ),
+                      TabBar(tabs: [
+                        Tab(
+                          child: Text(
+                            'Altın',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w600,
                             ),
-                          );
-                        }),
-                    SizedBox(height: 40),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: currencies.length,
-                      itemBuilder: (context, index) {
-                        CurrenyModel currency = currencies[index];
-                        return DataCard(
-                          currency: currency,
+                          ),
+                        ),
+                        Tab(
+                          child: Text(
+                            'Döviz',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ]),
+                      Builder(builder: (context) {
+                        int tabIndex = DefaultTabController.of(context).index;
+                        List _currencies = tabIndex == 0
+                            ? dataProvider.currencies
+                                .where((element) => element.code.contains('-'))
+                                .toList()
+                            : dataProvider.currencies
+                                .where((element) => !element.code.contains('-'))
+                                .toList();
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: _currencies.length,
+                          itemBuilder: (context, index) {
+                            CurrenyModel currency = _currencies[index];
+                            return DataCard(
+                              currency: currency,
+                            );
+                          },
                         );
-                      },
-                    ),
-                  ],
+                      }),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            BannerAdClass(),
-          ],
+              SafeArea(child: BannerAdClass()),
+            ],
+          ),
         ),
       ),
     );
@@ -98,9 +141,11 @@ class DataCard extends StatelessWidget {
   const DataCard({
     Key? key,
     required this.currency,
+    this.showDetails = true,
   }) : super(key: key);
 
   final CurrenyModel currency;
+  final bool showDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -118,24 +163,59 @@ class DataCard extends StatelessWidget {
             children: [
               SizedBox(
                 width: 80,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      ImageService.icon('gold-2'),
-                      height: 30,
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      currency.FullName,
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black,
+                child: GestureDetector(
+                  onTap: () {
+                    if (showDetails)
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CurrenctDetailUser(
+                                    currency: currency,
+                                  )));
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        ImageService.icon('gold-2'),
+                        height: 30,
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
+                      const SizedBox(height: 4),
+                      Text(
+                        currency.FullName,
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 4),
+                      if (showDetails)
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.red[700],
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          padding: EdgeInsets.all(4),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.notifications_on,
+                                  color: Colors.white, size: 14),
+                              SizedBox(width: 4),
+                              Text(
+                                'DETAYLAR İÇİN\nTIKLAYIN',
+                                style: TextStyle(
+                                    fontSize: 6,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white),
+                              ),
+                            ],
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(width: 10),
@@ -148,8 +228,16 @@ class DataCard extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Alış: ', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.green)),
-                              Text('${currency.buying} TL', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.green)),
+                              Text('Alış: ',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.green)),
+                              Text('${currency.buying} TL',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.green)),
                             ],
                           ),
                         ),
@@ -158,8 +246,16 @@ class DataCard extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Satış: ', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.red)),
-                              Text('${currency.selling} TL', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.red)),
+                              Text('Satış: ',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.red)),
+                              Text('${currency.selling} TL',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.red)),
                             ],
                           ),
                         ),
@@ -168,9 +264,16 @@ class DataCard extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Degişim: ', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.grey)),
+                              Text('Degişim: ',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.grey)),
                               Text('%${currency.changeRate.toStringAsFixed(3)}',
-                                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.grey)),
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.grey)),
                             ],
                           ),
                         ),
@@ -217,7 +320,10 @@ class NewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => NewDetailScreen(newModel: newModel)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => NewDetailScreen(newModel: newModel)));
       },
       child: Container(
         margin: const EdgeInsets.only(right: 16),

@@ -14,13 +14,15 @@ class DataProvider extends ChangeNotifier {
 
   Future<void> getCurrencies() async {
     List currencyCodes = allCurrencies.map((e) => e['code']).toList();
-    List<CurrenyModel> _currencies = await DataService().getCurrencies(currencyCodes);
+    List<CurrenyModel> _currencies = await DataService().getCurrencies();
+    print('_currencies: $_currencies');
     currencies = _currencies;
     notifyListeners();
   }
 
   Future<void> getNews() async {
     news = await FirestoreService().getNews();
+    news.sort((a, b) => b.id.compareTo(a.id));
     notifyListeners();
   }
 
